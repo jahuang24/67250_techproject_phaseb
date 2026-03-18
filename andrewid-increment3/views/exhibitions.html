@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="jahuang24">
+    <meta name="keywords" content="Museum, Carnegie Mellon University, Information Systems">
+    <meta name="description" content="MonoMuse website redesign project">
+    <title>MonoMuse</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="../static/script.js" defer></script>
+</head>
+<body onload="addYear()">
+    <header>
+        <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo">
+        <nav>
+            <a id="navselected" href="../index.html">Home</a>
+            <a href="./explore.html">Explore</a>
+            <a href="./exhibitions.html">Exhibitions</a>
+            <a href="./tickets.html">Tickets</a>
+            <a href="./checkout.html">Checkout</a>
+        </nav>
+    </header>
+    <div class="main">
+        <h1>Exhibitions</h1>
+        <h3>Code and Canvas</h3>
+        <p>This exhibition showcases how artists use algorithms, generative design, and machine learning to create evolving visual works that change based on audience interaction.</p>
+        <h3>Future Memory Lab</h3>
+        <p>Visitors step into immersive installations where sound, projection, and augmented reality blend personal stories with historical archives to explore how technology shapes collective memory.</p>
+    </div>
+    <footer>
+        <p>&copy; <span id="copyYear"></span> MonoMuse. All rights reserved.</p>
+    </footer>
+</body>
+</html>
