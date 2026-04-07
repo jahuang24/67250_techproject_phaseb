@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="jahuang24">
+    <meta name="keywords" content="Museum, Carnegie Mellon University, Information Systems">
+    <meta name="description" content="MonoMuse website redesign project">
+    <title>MonoMuse</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="../static/script.js" defer></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+</head>
+<body onload="addYear()">
+    <div class="container">
+        <header class="header">
+            <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo">
+        </header>
+        <nav class="nav_bar">
+            <a href="../index.html">Home</a>
+            <a href="./exhibitions.html">Exhibitions</a>
+            <a href="./tickets.html">Tickets</a>
+            <a href="./support_us.html">Support Us</a>
+            <a href="javascript:void(0);" class="hamburger" onclick="toggleNav()">&#9776;</a>
+        </nav>
+        <main class="main">
+            <h1>Exhibitions</h1>
+            <!-- Code and Canvas -->
+            <h3>Code and Canvas</h3>
+            <p>This exhibition showcases how artists use algorithms, generative design, and machine learning to create evolving visual works that change based on audience interaction.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/a-17-dOJN2c?si=vnEPP9gLr7CsU6_r" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <!-- Future Memory Lab -->
+            <h3>Future Memory Lab</h3>
+            <p>Visitors step into immersive installations where sound, projection, and augmented reality blend personal stories with historical archives to explore how technology shapes collective memory.</p>
+            <figure class="main_figure">
+                <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=900&q=80" alt="Visitors walking through a modern museum gallery at MonoMuse">
+            </figure>
+        </main>
+        <figure class="main_figure"></figure>
+        <footer class="footer">
+            <p>&copy; <span id="copyYear"></span> MonoMuse. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,563 @@
+:root {
+    --color-bg:           #f5f5f7;
+    --color-bg-surface:   #ffffff;
+    --color-text:         #000000;
+    --color-accent:       #133a94;
+    --color-accent-dark:  #0b2c7a;
+    --color-error:        #e05c5c;
+    --color-table-stripe: #919bff;
+
+    --rgb-text:         245, 245, 247;
+    --rgb-accent-dark:  77, 92, 59;
+    --rgb-white:        255, 255, 255;
+}
+
+* {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    line-height: 1.5;
+    padding: 5px;
+    margin: 5px;
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+#logo {
+    width: 18%;
+    display: block;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 400;
+    padding: 8px 10px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+}
+
+nav a:hover {
+    border-color: var(--color-accent-dark);
+}
+
+nav a.active {
+    color: var(--color-accent);
+    font-weight: 600;
+    border-color: var(--color-accent-dark);
+    background: rgba(var(--rgb-accent-dark), 0.2);
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+footer {
+    border-top: 1px solid rgba(var(--rgb-text), .12);
+    padding: 18px 16px;
+    text-align: center;
+    color: rgba(var(--rgb-text), .72);
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: fit-content;
+}
+  
+tr:nth-child(even) {
+    background-color: rgba(var(--rgb-white), 0.05);
+}
+
+#museum-calendar tr:nth-child(even) {
+    background-color: transparent !important;
+}
+
+form * {
+    margin: auto;
+    text-align: center;  
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+        'header nav_bar'
+        'main   main'
+        'footer footer';
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
+/* Places each element into the correct area of the grid */
+.header {
+    grid-area: header; 
+}
+.nav_bar {
+    grid-area: nav_bar;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.main {
+grid-area: main; 
+}
+
+.main_img {
+    grid-area: main-img; 
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+.footer {
+    grid-area: footer;
+}
+
+.hero {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 75vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.hero * {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #000;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 24px;
+    white-space: nowrap;
+}
+
+#map {
+    height: 450px;
+    width: 100%;
+}
+
+#museum-calendar {
+    width: 100%;
+    margin: 16px 0;
+    padding: 0;
+}
+
+/* Neutralise the global * { margin: 5px; padding: 5px } for all FullCalendar
+   structural and toolbar elements so layout matches FC's own intent. */
+#museum-calendar .fc,
+#museum-calendar .fc-view-harness,
+#museum-calendar .fc-view,
+#museum-calendar .fc-scroller-harness,
+#museum-calendar .fc-daygrid-body {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#museum-calendar .fc-scroller {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+#museum-calendar .fc-header-toolbar {
+    padding: 0 !important;
+    margin: 0 0 1.5em 0 !important;
+}
+
+#museum-calendar .fc-toolbar-chunk,
+#museum-calendar .fc-button-group,
+#museum-calendar .fc-toolbar-title {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#museum-calendar .fc-button {
+    margin: 0 !important;
+}
+
+#museum-calendar .fc-daygrid-day.cal-open {
+    background: rgba(146, 173, 112, 0.18) !important;
+}
+
+#museum-calendar .fc-daygrid-day.cal-open .fc-daygrid-day-number {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+#museum-calendar .fc-daygrid-day.cal-closed {
+    background: rgba(224, 92, 92, 0.08) !important;
+    opacity: 0.5;
+}
+
+#museum-calendar .fc-daygrid-day.cal-closed .fc-daygrid-day-number {
+    color: var(--color-error);
+}
+
+#museum-calendar .fc-day-today {
+    background: rgba(146, 173, 112, 0.35) !important;
+    box-shadow: inset 0 0 0 2px var(--color-accent) !important;
+}
+
+#museum-calendar .fc-day-today .fc-daygrid-day-number {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+
+/* ── Tickets page ── */
+#ticketCheckoutForm {
+    max-width: 480px;
+    margin: 28px auto;
+    padding: 28px 32px;
+    border: 1px solid rgba(var(--rgb-text), .15);
+    border-radius: 12px;
+    background: rgba(var(--rgb-white), 0.04);
+}
+
+#ticketCheckoutForm * {
+    margin: 0;
+    text-align: left;
+    background: transparent;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(var(--rgb-text), .25);
+    border-radius: 8px;
+    background: rgba(var(--rgb-white), 0.07) !important;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.form-group select option {
+    background: var(--color-bg-surface) !important;
+}
+
+.error-msg {
+    display: block;
+    color: var(--color-error);
+    font-size: 0.82rem;
+    margin-top: 5px;
+    min-height: 16px;
+}
+
+.form-group.has-error input,
+.form-group.has-error select {
+    border-color: var(--color-error);
+}
+
+#priceDisplay {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    padding: 10px 0 4px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    padding: 0;
+}
+
+#placeOrderBtn {
+    display: block;
+    margin: 10px auto 0;
+    padding: 12px 32px;
+    background: var(--color-text);
+    color: var(--color-bg-surface);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#placeOrderBtn:hover {
+    background: var(--color-accent);
+}
+
+#ticketBuyButton {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 32px;
+    background: var(--color-text);
+    color: var(--color-bg-surface);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#ticketBuyButton:hover {
+    background: var(--color-accent);
+}
+
+/* ── Confirmation page ── */
+.confirmation-card {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 36px 32px;
+    border: 1px solid rgba(var(--rgb-text), .15);
+    border-radius: 12px;
+    background: rgba(var(--rgb-white), 0.04);
+    text-align: center;
+}
+
+.confirmation-card * {
+    background: transparent;
+}
+
+.confirmation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    margin: 0 auto 16px;
+    font-size: 1.8rem;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.confirmation-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+}
+
+.confirmation-subtitle {
+    color: rgba(var(--rgb-text), .72);
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+}
+
+.order-details {
+    text-align: left;
+    border: 1px solid rgba(var(--rgb-text), .1);
+    border-radius: 8px;
+    padding: 4px 0;
+    margin-bottom: 28px;
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(var(--rgb-text), .08);
+}
+
+.order-row:last-child {
+    border-bottom: none;
+    font-weight: 700;
+    color: var(--color-accent);
+    font-size: 1.05rem;
+}
+
+.order-label {
+    color: var(--color-text);
+    font-size: 0.9rem;
+}
+
+.order-value {
+    font-weight: 400;
+    text-align: right;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 11px 28px;
+    background: var(--color-text);
+    color: var(--color-bg-surface);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.back-btn:hover {
+    background: var(--color-accent);
+}
+
+/* ── Support Us page ── */
+.membership-card {
+    max-width: 420px;
+    border: 2px solid #000;
+    border-radius: 12px;
+    padding: 28px 28px 20px;
+    margin: 20px auto 32px;
+}
+
+.membership-card * {
+    background: transparent;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.membership-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 6px !important;
+}
+
+.membership-price {
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin-bottom: 20px !important;
+}
+
+.membership-perks {
+    list-style: none;
+    margin-bottom: 24px !important;
+}
+
+.membership-perks li {
+    padding: 5px 0;
+    font-size: 0.95rem;
+}
+
+.membership-perks li::before {
+    content: '✓';
+    margin-right: 10px;
+    color: var(--color-text);
+    font-size: 0.8rem;
+}
+
+.membership-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--color-text);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.membership-btn:hover {
+    opacity: 0.85;
+}
+
+
+#donationTiers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.donation-tier-btn {
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid rgba(var(--rgb-text), .3);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.donation-tier-btn:hover {
+    border-color: var(--color-accent);
+    background: rgba(var(--rgb-accent-dark), 0.12);
+}
+
+@media only screen and (max-width: 650px) {
+    .nav_bar a {
+        display: none;
+    }
+
+    .nav_bar a.hamburger {
+        display: block;
+    }
+
+    .nav_bar.responsive {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav_bar.responsive a {
+        display: block;
+    }
+
+    .container {
+        grid-template-areas:
+            'header'
+            'nav_bar'
+            'main'
+            'footer';
+        grid-template-columns: 1fr;
+    }
+
+    #logo {
+        width: 40%;
+    }
+
+    .nav_bar {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}

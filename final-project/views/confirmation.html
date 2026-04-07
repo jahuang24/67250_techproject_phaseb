@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="jahuang24">
+    <meta name="keywords" content="Museum, Carnegie Mellon University, Information Systems">
+    <meta name="description" content="MonoMuse website redesign project">
+    <title>MonoMuse — Order Confirmation</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="../static/script.js" defer></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+</head>
+<body onload="addYear()">
+    <div class="container">
+        <header class="header">
+            <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo">
+        </header>
+        <nav class="nav_bar">
+            <a href="../index.html">Home</a>
+            <a href="./exhibitions.html">Exhibitions</a>
+            <a href="./tickets.html">Tickets</a>
+            <a href="./support_us.html">Support Us</a>
+            <a href="javascript:void(0);" class="hamburger" onclick="toggleNav()">&#9776;</a>
+        </nav>
+        <main class="main">
+            <div class="confirmation-card">
+                <div class="confirmation-icon">&#10003;</div>
+                <div class="confirmation-title">Order Confirmed!</div>
+                <p class="confirmation-subtitle">Thank you for your purchase. We look forward to seeing you at MonoMuse!</p>
+
+                <div class="order-details" id="orderDetails"></div>
+
+                <a href="./tickets.html" class="back-btn">Buy More Tickets</a>
+            </div>
+        </main>
+        <figure class="main_figure"></figure>
+        <footer class="footer">
+            <p>&copy; <span id="copyYear"></span> MonoMuse. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

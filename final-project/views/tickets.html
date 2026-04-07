@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="jahuang24">
+    <meta name="keywords" content="Museum, Carnegie Mellon University, Information Systems">
+    <meta name="description" content="MonoMuse website redesign project">
+    <title>MonoMuse</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="../static/script.js" defer></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+</head>
+<body onload="addYear()">
+    <div class="container">
+        <header class="header">
+            <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo">
+        </header>
+        <nav class="nav_bar">
+            <a href="../index.html">Home</a>
+            <a href="./exhibitions.html">Exhibitions</a>
+            <a href="./tickets.html">Tickets</a>
+            <a href="./support_us.html">Support Us</a>
+            <a href="javascript:void(0);" class="hamburger" onclick="toggleNav()">&#9776;</a>
+        </nav>
+        <main class="main">
+            <h1>Buy Tickets</h1>
+            <!-- Ticket prices -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ticket Type</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>General</td>
+                        <td>Standard admission for one adult, includes access to all current exhibitions.</td>
+                        <td>$20</td>
+                    </tr>
+                    <tr>
+                        <td>Student</td>
+                        <td>Discounted admission with valid student ID.</td>
+                        <td>$12</td>
+                    </tr>
+                    <tr>
+                        <td>Member</td>
+                        <td>Complimentary entry for MonoMuse members plus priority event booking.</td>
+                        <td>$0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Available dates -->
+            <h2>Museum Hours</h2>
+            <p>Open Tuesday - Sunday, 10am - 6pm. Closed Mondays.</p>
+            <div id="museum-calendar"></div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var calendarEl = document.getElementById('museum-calendar');
+                    
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        height: 'auto',
+                        headerToolbar: {
+                            left: 'prev,next',
+                            center: 'title',
+                            right: ''
+                        },
+                        dayCellDidMount: function (info) {
+                            var day = info.date.getDay();
+                            if (day === 1) {
+                                info.el.classList.add('cal-closed');
+                            } else {
+                                info.el.classList.add('cal-open');
+                            }
+                        }
+                    });
+
+                    calendar.render();
+                });
+            </script>
+            <!-- Buy Button -->
+            <button id="ticketBuyButton" onclick="this.style.display='none'; document.getElementById('ticketCheckoutForm').style.display='block';">Buy Tickets</button>
+            <!-- Checkout form -->
+            <form id="ticketCheckoutForm" novalidate style="display: none;">
+
+                <div class="form-group" id="visitDate-group">
+                    <label for="visitDate">Visit Date *</label>
+                    <input type="date" id="visitDate" name="visitDate">
+                    <span class="error-msg" id="visitDate-error"></span>
+                </div>
+
+                <div class="form-group" id="ticketType-group">
+                    <label for="ticketType">Ticket Type *</label>
+                    <select id="ticketType" name="ticketType">
+                        <option value="">-- Select a ticket type --</option>
+                        <option value="general" data-price="20">General ($20)</option>
+                        <option value="student" data-price="12">Student ($12)</option>
+                        <option value="member" data-price="0">Member ($0)</option>
+                    </select>
+                    <span class="error-msg" id="ticketType-error"></span>
+                </div>
+
+                <div class="form-group" id="quantity-group">
+                    <label for="quantity">Quantity (1-10) *</label>
+                    <input type="number" id="quantity" name="quantity" min="1" max="10" placeholder="Enter a number from 1 to 10">
+                    <span class="error-msg" id="quantity-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <p id="priceDisplay">Total: —</p>
+                </div>
+
+                <div class="form-group" id="email-group">
+                    <label for="email">Email *</label>
+                    <input type="text" id="email" name="email" placeholder="you@example.com">
+                    <span class="error-msg" id="email-error"></span>
+                </div>
+
+                <div class="form-group" id="zipCode-group">
+                    <label for="zipCode">Zip Code <span style="font-weight:300;">(optional)</span></label>
+                    <input type="text" id="zipCode" name="zipCode" maxlength="5" placeholder="12345">
+                    <span class="error-msg" id="zipCode-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="mailingList" name="mailingList">
+                        <label for="mailingList">Join our mailing list</label>
+                    </div>
+                </div>
+
+                <button type="button" id="placeOrderBtn" onclick="placeOrder()">Place Order</button>
+            </form>
+
+            <script>
+                var ticketPrices = { general: 20, student: 12, member: 0 };
+                var ticketLabels = { general: 'General', student: 'Student', member: 'Member' };
+
+                function updatePrice() {
+                    var type = document.getElementById('ticketType').value;
+                    var qtyRaw = document.getElementById('quantity').value;
+                    var qty = parseInt(qtyRaw, 10);
+                    var display = document.getElementById('priceDisplay');
+                    if (type && !isNaN(qty) && qty >= 1 && qty <= 10) {
+                        display.textContent = 'Total: $' + (ticketPrices[type] * qty);
+                    } else {
+                        display.textContent = 'Total: —';
+                    }
+                }
+
+                document.getElementById('ticketType').addEventListener('change', updatePrice);
+                document.getElementById('quantity').addEventListener('input', updatePrice);
+
+                function setError(fieldId, message) {
+                    var group = document.getElementById(fieldId + '-group');
+                    var errorEl = document.getElementById(fieldId + '-error');
+                    if (group) group.classList.add('has-error');
+                    if (errorEl) errorEl.textContent = message;
+                }
+
+                function clearError(fieldId) {
+                    var group = document.getElementById(fieldId + '-group');
+                    var errorEl = document.getElementById(fieldId + '-error');
+                    if (group) group.classList.remove('has-error');
+                    if (errorEl) errorEl.textContent = '';
+                }
+
+                function placeOrder() {
+                    var valid = true;
+
+                    // Visit date
+                    var dateVal = document.getElementById('visitDate').value;
+                    clearError('visitDate');
+                    if (!dateVal) {
+                        setError('visitDate', 'Please select a visit date.');
+                        valid = false;
+                    } else {
+                        var d = new Date(dateVal + 'T00:00:00');
+                        if (d.getDay() === 1) {
+                            setError('visitDate', 'The museum is closed on Mondays. Please choose another day.');
+                            valid = false;
+                        }
+                    }
+
+                    // Ticket type
+                    var typeVal = document.getElementById('ticketType').value;
+                    clearError('ticketType');
+                    if (!typeVal) {
+                        setError('ticketType', 'Please select a ticket type.');
+                        valid = false;
+                    }
+
+                    // Quantity
+                    var qtyRaw = document.getElementById('quantity').value;
+                    clearError('quantity');
+                    if (!qtyRaw) {
+                        setError('quantity', 'Please enter a quantity.');
+                        valid = false;
+                    } else {
+                        var qty = parseInt(qtyRaw, 10);
+                        if (isNaN(qty) || qty < 1 || qty > 10 || qtyRaw.includes('.')) {
+                            setError('quantity', 'Quantity must be a whole number between 1 and 10.');
+                            valid = false;
+                        }
+                    }
+
+                    // Email
+                    var emailVal = document.getElementById('email').value.trim();
+                    clearError('email');
+                    if (!emailVal) {
+                        setError('email', 'Please enter your email address.');
+                        valid = false;
+                    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                        setError('email', 'Please enter a valid email address (e.g. name@example.com).');
+                        valid = false;
+                    }
+
+                    // Zip code (optional)
+                    var zipVal = document.getElementById('zipCode').value.trim();
+                    clearError('zipCode');
+                    if (zipVal && !/^\d{5}$/.test(zipVal)) {
+                        setError('zipCode', 'Zip code must be exactly 5 digits.');
+                        valid = false;
+                    }
+
+                    if (!valid) return;
+
+                    var total = ticketPrices[typeVal] * parseInt(qtyRaw, 10);
+                    var params = new URLSearchParams({
+                        date: dateVal,
+                        type: ticketLabels[typeVal],
+                        quantity: qtyRaw,
+                        total: total,
+                        email: emailVal
+                    });
+                    window.location.href = './confirmation.html?' + params.toString();
+                }
+            </script>
+        </main>
+        <figure class="main_figure"></figure>
+        <footer class="footer">
+            <p>&copy; <span id="copyYear"></span> MonoMuse. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
